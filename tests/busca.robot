@@ -1,27 +1,26 @@
 * Settings *
 
-Library   Browser
+Resource   ${EXECDIR}/resources/base.robot
+
+Test Setup      Start Session
+Test Teardown   Take Screenshot
 
 * Test Cases *
-Buscar um restaurante
-
-    New Browser     chromium        false
-    New Page        https://parodifood.herokuapp.com/
-   
-    #Checkpoint
-    Get Text        css=span:nth-child(1)    contains   Nunca foi tão engraçado pedir comida
-
-    Click           text=Estou com fome!
-    Get Text        css=h1 strong       contains      Ta na hora de matar a fome!
-
-    Click           css=.search-link
-    Fill Text       css=input[formcontrolname="searchControl"]      Debuger
-
-    Wait For Elements State     css=.place-info-box     visible     10
-    Get Text                    css=.place-info-box     contains                DEBUGER KING
-
-    Take Screenshot
-
-
-
+Deve buscar um único restaurante
+    Go to Restaurants
+    Search By                           debuger
+    Restaurant Should be visible        DEBUGER KING
+    Restaurant Count Should be          1
     
+
+Deve buscar por uma categoria
+    Go to Restaurants
+    Search By                           cafe
+    Restaurant Should be visible        STARBUGS COFFE
+    
+
+Deve buscar todos os restaurantes
+    Go to Restaurants
+    Search By                           a
+    Restaurant Count Should be          5
+   
